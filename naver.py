@@ -42,6 +42,8 @@ from download import setup_download_dir
 url = input("url:")
 wbdata = str((requests.get(url).content),'utf-8')
 # soup = BeautifulSoup(navertext.html,'html.parser')
+# with open('data.txt','w',encoding='utf-8') as f:
+#     f.write(wbdata)
 html = ''
 count = 0
 for lines in wbdata.splitlines():
@@ -51,14 +53,18 @@ for lines in wbdata.splitlines():
     else:
         continue
 soup1 = BeautifulSoup(html,'lxml')
+# with open('data_soup.txt','w',encoding='utf-8') as f:
+#     f.write(str(soup1))
+
 res = soup1.select(".se_mediaImage")
+# res = soup1.find_all("img",class_="se_mediaImage")
 links =[]
 filename_list = []
 for link in res:
     url = link.get("data-src").split('?')[0]
     links.append( url )
     filename_list.append(str(urllib.parse.unquote(os.path.basename(url),'utf-8')))
-print(len(links))
+print(len(res))
 
 
 # repeated_name = dict(Counter(filename_list))
