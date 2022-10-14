@@ -87,7 +87,7 @@ def main():
             name = str(index) + '_' + realname + '.jpg'
             queue.put((download_dir, link, name))
     else:
-        from naver import get_link
+        from naver_regex import get_link
 
         count = len(get_link())
 
